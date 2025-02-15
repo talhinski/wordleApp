@@ -31,18 +31,17 @@ public class WordleLogic {
         return vocabulary.contains(word);
     }
 
-    public void processGuess(String guess) {
-        if (!isValidWord(guess)) {
-            System.out.println("The word '" + guess + "' is not in the vocabulary.");
-            return;
-        }
+    public Guess processGuess(String guess) {
+
         try {
             Guess result = game.guess(guess);
             // Minimal output; merge as needed.
             System.out.println("Guess: " + result.getWord());
             System.out.println("Results: " + result.getResults());
+            return result;
         } catch (IllegalArgumentException ex) {
             System.out.println("Error: " + ex.getMessage());
+            throw new IllegalArgumentException(ex.getMessage());
         }
     }
 
