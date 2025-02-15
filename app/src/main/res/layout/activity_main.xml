@@ -21,12 +21,12 @@
         app:layout_constraintEnd_toEndOf="parent">
 
         <!-- Include the wordel_row layout 6 times -->
-        <include layout="@layout/wordel_row" />
-        <include layout="@layout/wordel_row" />
-        <include layout="@layout/wordel_row" />
-        <include layout="@layout/wordel_row" />
-        <include layout="@layout/wordel_row" />
-        <include layout="@layout/wordel_row" />
+        <include layout="@layout/wordle_row" />
+        <include layout="@layout/wordle_row" />
+        <include layout="@layout/wordle_row" />
+        <include layout="@layout/wordle_row" />
+        <include layout="@layout/wordle_row" />
+        <include layout="@layout/wordle_row" />
 
     </GridLayout>
 
@@ -46,14 +46,14 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Submit" />
+            android:text="אישור" />
 
         <Button
             android:id="@+id/reset_button"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:text="Reset" />
+            android:text="נקה" />
 
     </LinearLayout>
 
