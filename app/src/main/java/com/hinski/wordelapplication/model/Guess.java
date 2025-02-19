@@ -12,9 +12,15 @@ public class Guess {
         this.results = results;
     }
 
+    public Guess() {
+        this.word = " ".repeat(5);
+        this.results = List.of(LetterResult.ABSENT, LetterResult.ABSENT, LetterResult.ABSENT, LetterResult.ABSENT, LetterResult.ABSENT);
+    }
+
     public String getWord() {
         return word;
     }
+
     public List<LetterResult> getResults() {
         return results;
     }

@@ -1,8 +1,8 @@
 package com.hinski.wordelapplication.model;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
-
 
 
 public class WordleGame {

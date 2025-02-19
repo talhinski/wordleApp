@@ -31,6 +31,13 @@ public class WordleLogic {
         return vocabulary.contains(word);
     }
 
+    public Guess getGuess(int index) {
+        if (index < 0 || index >= game.getAttempts().size()) {
+            return new Guess(); // Assuming Guess has a constructor that takes a String
+        }
+        return game.getAttempts().get(index);
+    }
+
     public Guess processGuess(String guess) {
 
         try {

@@ -1,59 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:gravity="center"
-    android:layout_margin="4dp">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    >
+<data>
 
-    <TextView
-        android:layout_width="0dp"
-        android:layout_height="48dp"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:textSize="24sp"
-        android:background="@drawable/wordle_cell"
+        <variable
+            name="guess"
+            type="com.hinski.wordelapplication.model.Guess" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_margin="4dp"
-        android:text="A" />
-
-    <TextView
-        android:layout_width="0dp"
-        android:layout_height="48dp"
-        android:layout_weight="1"
         android:gravity="center"
-        android:textSize="24sp"
-        android:background="@drawable/wordle_cell"
-        android:layout_margin="4dp"
-        android:text="B" />
+        android:orientation="horizontal">
 
-    <TextView
-        android:layout_width="0dp"
-        android:layout_height="48dp"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:textSize="24sp"
-        android:background="@drawable/wordle_cell"
-        android:layout_margin="4dp"
-        android:text="C" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="60dp"
+            android:layout_margin="4dp"
+            android:layout_weight="1"
+            android:background="@drawable/wordle_cell"
+            android:gravity="center"
+            android:text="@{guess.results.get(0).toString()}"
+            android:textSize="24sp" />
 
-    <TextView
-        android:layout_width="0dp"
-        android:layout_height="48dp"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:textSize="24sp"
-        android:background="@drawable/wordle_cell"
-        android:layout_margin="4dp"
-        android:text="D" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_margin="4dp"
+            android:layout_weight="1"
+            android:background="@drawable/wordle_cell"
+            android:gravity="center"
+            android:text="@{guess.results.get(1).toString()}"
+            android:textSize="24sp" />
 
-    <TextView
-        android:layout_width="0dp"
-        android:layout_height="48dp"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:textSize="24sp"
-        android:background="@drawable/wordle_cell"
-        android:layout_margin="4dp"
-        android:text="E" />
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_margin="4dp"
+            android:layout_weight="1"
+            android:background="@drawable/wordle_cell"
+            android:gravity="center"
+            android:text="@{guess.results.get(2).toString()}"
+            android:textSize="24sp" />
 
-</LinearLayout>
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_margin="4dp"
+            android:layout_weight="1"
+            android:background="@drawable/wordle_cell"
+            android:gravity="center"
+            android:text="@{guess.results.get(3).toString()}"
+            android:textSize="24sp" />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_margin="4dp"
+            android:layout_weight="1"
+            android:background="@drawable/wordle_cell"
+            android:gravity="center"
+            android:text="@{guess.results.get(4).toString()}"
+            android:textSize="24sp" />
+
+    </LinearLayout>
+</layout>
