@@ -44,7 +44,6 @@ public class MainActivity extends AppCompatActivity {
                         " " +
                         currentGuess.getResults());
                 binding.guessInput.setText("");
-                binding.setLogic(wordleLogic); // bind (for future use as needed)
             }
         });
 

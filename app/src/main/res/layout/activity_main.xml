@@ -1,74 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android">
+  <data>
+    <variable
+      name="logic"
+      type="com.hinski.wordelapplication.logic.WordleLogic" />
+  </data>
+  <androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
 
-    <data>
+    <!-- GridLayout for the Wordle board -->
+    <GridLayout
+        android:id="@+id/wordle_grid"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="16dp"
+        android:columnCount="1"
+        android:rowCount="6"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/button_container"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
 
-        <variable
-            name="logic"
-            type="com.hinski.wordelapplication.logic.WordleLogic" />
-    </data>
+        <!-- Include the wordel_row layout 6 times -->
+        <include layout="@layout/wordle_row" />
+        <include layout="@layout/wordle_row" />
+        <include layout="@layout/wordle_row" />
+        <include layout="@layout/wordle_row" />
+        <include layout="@layout/wordle_row" />
+        <include layout="@layout/wordle_row" />
 
-    <androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:id="@+id/main"
+    </GridLayout>
+
+    <!-- Container for buttons -->
+    <LinearLayout
+        android:id="@+id/button_container"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_margin="16dp">
+
+        <Button
+            android:id="@+id/submit_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="אישור" />
+
+        <Button
+            android:id="@+id/reset_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="נקה" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".MainActivity">
+        android:padding="16dp">
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/secretWordHint"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Guess the word!" />
+
+        <EditText
+            android:id="@+id/guessInput"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:padding="16dp">
+            android:layout_height="wrap_content"
+            android:hint="Enter your guess" />
 
-            <TextView
-                android:id="@+id/secretWordHint"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Guess the word!" />
+        <Button
+            android:id="@+id/submitButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Submit Guess" />
 
-            <EditText
-                android:id="@+id/guessInput"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Enter your guess" />
-
-            <Button
-                android:id="@+id/submitButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Submit Guess" />
-
-            <TextView
-                android:id="@+id/resultDisplay"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:paddingTop="16dp"
-                android:text="Results appear here" />
-            <!-- Include the wordle_row layout 6 times -->
-            <include
-                layout="@layout/wordle_row"
-                app:guess="@{logic.getGuess(0)}" />
-
-            <include
-                layout="@layout/wordle_row"
-                app:guess="@{logic.getGuess(1)}" />
-
-            <include
-                layout="@layout/wordle_row"
-                app:guess="@{logic.getGuess(2)}" />
-
-            <include
-                layout="@layout/wordle_row"
-                app:guess="@{logic.getGuess(3)}" />
-
-            <include
-                layout="@layout/wordle_row"
-                app:guess="@{logic.getGuess(4)}" />
-
-            <include
-                layout="@layout/wordle_row"
-                app:guess="@{logic.getGuess(5)}" />
-        </LinearLayout>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/resultDisplay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Results appear here"
+            android:paddingTop="16dp"/>
+    </LinearLayout>
+  </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
