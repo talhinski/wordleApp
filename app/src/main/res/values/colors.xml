@@ -5,4 +5,10 @@
     <color name="light_gray">#F2F2F2</color>
     <color name="light_blue">#00BCD4</color>
     <color name="teal_700">#00897B</color>
+
+    <!-- Colors for different key states -->
+    <color name="keyboard_default">#787C7E</color> <!-- Default gray -->
+    <color name="correct">#6AAA64</color> <!-- Green for correct letters -->
+    <color name="misplaced">#C9B458</color> <!-- Yellow for misplaced letters -->
+    <color name="incorrect">#3A3A3C</color> <!-- Dark gray for incorrect letters -->
 </resources>

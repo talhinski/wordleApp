@@ -14,7 +14,7 @@ public class Guess {
 
     public Guess() {
         this.word = " ".repeat(5);
-        this.results = List.of(LetterResult.ABSENT, LetterResult.ABSENT, LetterResult.ABSENT, LetterResult.ABSENT, LetterResult.ABSENT);
+        this.results = List.of(LetterResult.EMPTY, LetterResult.EMPTY, LetterResult.EMPTY, LetterResult.EMPTY, LetterResult.EMPTY);
     }
 
     public String getWord() {

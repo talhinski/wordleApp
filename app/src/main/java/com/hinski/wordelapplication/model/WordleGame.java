@@ -26,7 +26,7 @@ public class WordleGame {
         String guessText = word;
         List<LetterResult> result = new ArrayList<>();
         for (int i = 0; i < secretWord.length(); i++) {
-            result.add(LetterResult.ABSENT);
+            result.add(LetterResult.INCORRECT);
         }
         char[] secretChars = secretWord.toCharArray();
 
@@ -45,7 +45,7 @@ public class WordleGame {
             char letter = guessText.charAt(i);
             int index = indexOfChar(secretChars, letter);
             if (index != -1) {
-                result.set(i, LetterResult.PRESENT);
+                result.set(i, LetterResult.MISPLACED);
                 secretChars[index] = '*'; // mark as used
             }
         }

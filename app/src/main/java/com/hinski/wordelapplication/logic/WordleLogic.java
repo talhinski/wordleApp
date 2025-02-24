@@ -27,6 +27,7 @@ public class WordleLogic {
         game = new WordleGame(secretWord);
     }
 
+
     public boolean isValidWord(String word) {
         return vocabulary.contains(word);
     }
@@ -58,6 +59,9 @@ public class WordleLogic {
 
     public boolean isGameWon() {
         return game.isGameWon();
+    }
+    public WordleGame getGame() {
+        return game;
     }
 
 }
