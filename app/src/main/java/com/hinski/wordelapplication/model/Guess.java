@@ -1,32 +1,29 @@
 package com.hinski.wordelapplication.model;
 
-import java.util.ArrayList;
+import androidx.databinding.ObservableArrayList;
+import androidx.databinding.ObservableList;
+
+import java.util.Collection;
 import java.util.List;
 
 public class Guess {
-    private List<CharResult> charResults;
+    public final ObservableList<CharResult> charResults  = new ObservableArrayList<>();
 
     public Guess() {
-        charResults = new ArrayList<CharResult>();
+        
     }
 
-    public Guess(List<CharResult> charResults) {
-        this.charResults = charResults;
+    public Guess(ObservableList<CharResult> charResults) {
+        this.charResults.addAll(charResults);
     }
 
     public Guess(String word, List<LetterResult> results) {
-        charResults = new ArrayList<CharResult>();
         for (int i = 0; i < word.length(); i++) {
             charResults.add(new CharResult(word.charAt(i), results.get(i)));
         }
     }
 
-
-    public List<CharResult> getCharResults() {
+    public ObservableList<CharResult> getCharResults() {
         return charResults;
-    }
-
-    public void setCharResults(List<CharResult> charResults) {
-        this.charResults = charResults;
     }
 }

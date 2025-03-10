@@ -68,7 +68,7 @@ public class WordleGame {
         for (Guess guess : attempts) {
             boolean allCorrect = true;
             for (CharResult letterResult : guess.getCharResults()) {
-                if (letterResult.getResult() != LetterResult.CORRECT) {
+                if (letterResult.result.get() != LetterResult.CORRECT) {
                     allCorrect = false;
                     break;
                 }

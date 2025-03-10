@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
-    >
-<data>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <data>
         <variable
             name="guess"
             type="com.hinski.wordelapplication.model.Guess" />
@@ -15,56 +14,49 @@
         android:gravity="center"
         android:orientation="horizontal">
 
-
-        <TextView
+        <include
+            layout="@layout/fragment_cell"
+            android:id="@+id/fragment_cell_1"
+            app:cell="@{guess.charResults.get(0)}"
             android:layout_width="0dp"
             android:layout_height="48dp"
             android:layout_margin="4dp"
-            android:layout_weight="1"
-            android:background="@drawable/wordle_cell"
-            android:gravity="center"
-            android:text="@{guess.charResults.get(0).character}"
-            android:textSize="24sp" />
+            android:layout_weight="1" />
 
-        <TextView
+        <include
+            layout="@layout/fragment_cell"
+            android:id="@+id/fragment_cell_2"
+            app:cell="@{guess.charResults.get(1)}"
             android:layout_width="0dp"
             android:layout_height="48dp"
             android:layout_margin="4dp"
-            android:layout_weight="1"
-            android:background="@drawable/wordle_cell"
-            android:gravity="center"
-            android:text="@{guess.charResults.get(1).character}"
-            android:textSize="24sp" />
+            android:layout_weight="1" />
 
-        <TextView
+        <include
+            layout="@layout/fragment_cell"
+            android:id="@+id/fragment_cell_3"
+            app:cell="@{guess.charResults.get(2)}"
             android:layout_width="0dp"
             android:layout_height="48dp"
             android:layout_margin="4dp"
-            android:layout_weight="1"
-            android:background="@drawable/wordle_cell"
-            android:gravity="center"
-            android:text="@{guess.charResults.get(2).character}"
-            android:textSize="24sp" />
+            android:layout_weight="1" />
 
-        <TextView
+        <include
+            layout="@layout/fragment_cell"
+            android:id="@+id/fragment_cell_4"
+            app:cell="@{guess.charResults.get(3)}"
             android:layout_width="0dp"
             android:layout_height="48dp"
             android:layout_margin="4dp"
-            android:layout_weight="1"
-            android:background="@drawable/wordle_cell"
-            android:gravity="center"
-            android:text="@{guess.charResults.get(3).character}"
-            android:textSize="24sp" />
+            android:layout_weight="1" />
 
-        <TextView
+        <include
+            layout="@layout/fragment_cell"
+            android:id="@+id/fragment_cell_5"
+            app:cell="@{guess.charResults.get(4)}"
             android:layout_width="0dp"
             android:layout_height="48dp"
             android:layout_margin="4dp"
-            android:layout_weight="1"
-            android:background="@drawable/wordle_cell"
-            android:gravity="center"
-            android:text="@{guess.charResults.get(4).character}"
-            android:textSize="24sp" />
-
+            android:layout_weight="1" />
     </LinearLayout>
 </layout>
