@@ -1,27 +1,32 @@
 package com.hinski.wordelapplication.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Guess {
-    String word;
-    List<LetterResult> results;
-
-    // Constructor
-    public Guess(String word, List<LetterResult> results) {
-        this.word = word;
-        this.results = results;
-    }
+    private List<CharResult> charResults;
 
     public Guess() {
-        this.word = " ".repeat(5);
-        this.results = List.of(LetterResult.EMPTY, LetterResult.EMPTY, LetterResult.EMPTY, LetterResult.EMPTY, LetterResult.EMPTY);
+        charResults = new ArrayList<CharResult>();
     }
 
-    public String getWord() {
-        return word;
+    public Guess(List<CharResult> charResults) {
+        this.charResults = charResults;
     }
 
-    public List<LetterResult> getResults() {
-        return results;
+    public Guess(String word, List<LetterResult> results) {
+        charResults = new ArrayList<CharResult>();
+        for (int i = 0; i < word.length(); i++) {
+            charResults.add(new CharResult(word.charAt(i), results.get(i)));
+        }
+    }
+
+
+    public List<CharResult> getCharResults() {
+        return charResults;
+    }
+
+    public void setCharResults(List<CharResult> charResults) {
+        this.charResults = charResults;
     }
 }

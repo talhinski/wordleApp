@@ -44,8 +44,7 @@ public class WordleLogic {
         try {
             Guess result = game.guess(guess);
             // Minimal output; merge as needed.
-            System.out.println("Guess: " + result.getWord());
-            System.out.println("Results: " + result.getResults());
+            System.out.println("Guess: " + result.getCharResults());
             return result;
         } catch (IllegalArgumentException ex) {
             System.out.println("Error: " + ex.getMessage());

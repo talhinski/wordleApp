@@ -15,6 +15,7 @@
         android:gravity="center"
         android:orientation="horizontal">
 
+
         <TextView
             android:layout_width="0dp"
             android:layout_height="48dp"
@@ -22,7 +23,7 @@
             android:layout_weight="1"
             android:background="@drawable/wordle_cell"
             android:gravity="center"
-            android:text="@{guess.results.get(0).toString()}"
+            android:text="@{guess.charResults.get(0).character}"
             android:textSize="24sp" />
 
         <TextView
@@ -32,7 +33,7 @@
             android:layout_weight="1"
             android:background="@drawable/wordle_cell"
             android:gravity="center"
-            android:text="@{guess.results.get(1).toString()}"
+            android:text="@{guess.charResults.get(1).character}"
             android:textSize="24sp" />
 
         <TextView
@@ -42,7 +43,7 @@
             android:layout_weight="1"
             android:background="@drawable/wordle_cell"
             android:gravity="center"
-            android:text="@{guess.results.get(2).toString()}"
+            android:text="@{guess.charResults.get(2).character}"
             android:textSize="24sp" />
 
         <TextView
@@ -52,7 +53,7 @@
             android:layout_weight="1"
             android:background="@drawable/wordle_cell"
             android:gravity="center"
-            android:text="@{guess.results.get(3).toString()}"
+            android:text="@{guess.charResults.get(3).character}"
             android:textSize="24sp" />
 
         <TextView
@@ -62,7 +63,7 @@
             android:layout_weight="1"
             android:background="@drawable/wordle_cell"
             android:gravity="center"
-            android:text="@{guess.results.get(4).toString()}"
+            android:text="@{guess.charResults.get(4).character}"
             android:textSize="24sp" />
 
     </LinearLayout>
