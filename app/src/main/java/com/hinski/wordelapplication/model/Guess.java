@@ -3,7 +3,6 @@ package com.hinski.wordelapplication.model;
 import androidx.databinding.ObservableArrayList;
 import androidx.databinding.ObservableList;
 
-import java.util.Collection;
 import java.util.List;
 
 public class Guess {

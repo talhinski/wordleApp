@@ -1,6 +1,5 @@
 package com.hinski.wordelapplication.model;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,13 +22,13 @@ public class WordleGame {
         if (word.length() != secretWord.length()) {
             throw new IllegalArgumentException("Guess must be " + secretWord.length() + " letters long");
         }
-        String guessText = word;
         List<LetterResult> result = new ArrayList<>();
         for (int i = 0; i < secretWord.length(); i++) {
             result.add(LetterResult.INCORRECT);
         }
         char[] secretChars = secretWord.toCharArray();
 
+        String guessText = word;
         // First pass: mark correct letters at correct positions.
         for (int i = 0; i < secretWord.length(); i++) {
             if (guessText.charAt(i) == secretChars[i]) {

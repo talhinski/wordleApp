@@ -1,7 +1,5 @@
 package com.hinski.wordelapplication.model;
 
-import static com.hinski.wordelapplication.model.LetterResult.MISPLACED;
-
 import androidx.databinding.ObservableField;
 
 import java.util.Objects;
