@@ -6,10 +6,12 @@ import androidx.databinding.ObservableList;
 import java.util.List;
 
 public class Guess {
-    public final ObservableList<CharResult> charResults  = new ObservableArrayList<>();
+    public final ObservableList<CharResult> charResults = new ObservableArrayList<>();
 
     public Guess() {
-        
+        for (int i = 0; i < 4; i++) {
+            charResults.add(new CharResult('x', LetterResult.EMPTY));
+        }
     }
 
     public Guess(ObservableList<CharResult> charResults) {

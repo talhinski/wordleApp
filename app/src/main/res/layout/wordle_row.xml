@@ -17,6 +17,7 @@
         android:orientation="horizontal">
 
         <include
+            android:background="@color/black"
             layout="@layout/fragment_cell"
             android:id="@+id/fragment_cell_1"
             app:cell="@{guess.charResults.get(0)}"

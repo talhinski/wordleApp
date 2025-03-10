@@ -10,5 +10,9 @@
     <color name="keyboard_default">#787C7E</color> <!-- Default gray -->
     <color name="correct">#6AAA64</color> <!-- Green for correct letters -->
     <color name="misplaced">#C9B458</color> <!-- Yellow for misplaced letters -->
-    <color name="incorrect">#3A3A3C</color> <!-- Dark gray for incorrect letters -->
+    <color name="incorrect">#3A3A3C</color>
+    <color name="light_blue_400">#FF29B6F6</color>
+    <color name="light_blue_600">#FF039BE5</color>
+    <color name="gray_400">#FFBDBDBD</color>
+    <color name="gray_600">#FF757575</color> <!-- Dark gray for incorrect letters -->
 </resources>

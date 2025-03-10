@@ -5,7 +5,7 @@ import androidx.databinding.ObservableField;
 import java.util.Objects;
 
 public class CharResult {
-    public final ObservableField<Character> letter = new ObservableField<>('\0');
+    public final ObservableField<Character> letter = new ObservableField<>('X');
     public final ObservableField<LetterResult> result = new ObservableField<>(LetterResult.EMPTY);
 
 

@@ -4,14 +4,14 @@ import android.content.Context;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.widget.LinearLayout;
-import com.hinski.wordelapplication.databinding.ComponentGameRowBinding;
-import com.hinski.wordelapplication.model.LetterResult;
 
-import java.util.List;
+import com.hinski.wordelapplication.databinding.ComponentGameRowBinding;
+import com.hinski.wordelapplication.model.Guess;
 
 public class GameRowComponent extends LinearLayout {
 
     private ComponentGameRowBinding binding;
+
 
     public GameRowComponent(Context context, AttributeSet attrs) {
         super(context, attrs);
@@ -23,7 +23,15 @@ public class GameRowComponent extends LinearLayout {
         binding = ComponentGameRowBinding.inflate(inflater, this, true);
     }
 
-    public void bind(String word, List<LetterResult> results) {
-        // Bind word and results to the UI
+    public void bind(Guess guess) {
+
+        binding.gameRowRoot.removeAllViews(); // Clear any existing views
+
+        LayoutInflater inflater = LayoutInflater.from(getContext());
+        for (int i = 0; i < guess.getCharResults().size(); i++) {
+            CellComponent cellComponent = new CellComponent(getContext(), null);
+            cellComponent.bind(guess.getCharResults().get(i));
+            binding.gameRowRoot.addView(cellComponent);
+        }
     }
 }

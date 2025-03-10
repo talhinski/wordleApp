@@ -6,7 +6,6 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
 import com.hinski.wordelapplication.logic.WordleLogic;
 import com.hinski.wordelapplication.model.Guess;
-
 import java.util.List;
 
 public class GameViewModel extends AndroidViewModel {
@@ -31,5 +30,13 @@ public class GameViewModel extends AndroidViewModel {
 
     public boolean isGameWon() {
         return logic.isGameWon();
+    }
+
+    public List<Guess> getGuesses() {
+        return attempts.getValue();
+    }
+
+    public void setGuesses(List<Guess> guesses) {
+        attempts.setValue(guesses);
     }
 }

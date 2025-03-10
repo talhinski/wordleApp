@@ -6,6 +6,7 @@
             type="com.hinski.wordelapplication.viewmodel.GameViewModel" />
     </data>
     <LinearLayout
+        android:id="@+id/game_board"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent">

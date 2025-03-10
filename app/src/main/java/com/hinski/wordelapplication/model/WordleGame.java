@@ -8,10 +8,14 @@ public class WordleGame {
     private final String secretWord;
     private final int maxAttempts;
     private final List<Guess> attempts = new ArrayList<>();
+    private int currentAttempt = 0;
 
     public WordleGame(String secretWord, int maxAttempts) {
         this.secretWord = secretWord; // removed toLowerCase()
         this.maxAttempts = maxAttempts;
+        for (int i = 0; i < maxAttempts; i++) {
+            attempts.add(new Guess());
+        }
     }
 
     public WordleGame(String secretWord) {
@@ -28,10 +32,10 @@ public class WordleGame {
         }
         char[] secretChars = secretWord.toCharArray();
 
-        String guessText = word;
+
         // First pass: mark correct letters at correct positions.
         for (int i = 0; i < secretWord.length(); i++) {
-            if (guessText.charAt(i) == secretChars[i]) {
+            if (word.charAt(i) == secretChars[i]) {
                 result.set(i, LetterResult.CORRECT);
                 secretChars[i] = '*'; // mark as used
             }
@@ -41,7 +45,7 @@ public class WordleGame {
         for (int i = 0; i < secretWord.length(); i++) {
             if (result.get(i) == LetterResult.CORRECT)
                 continue;
-            char letter = guessText.charAt(i);
+            char letter = word.charAt(i);
             int index = indexOfChar(secretChars, letter);
             if (index != -1) {
                 result.set(i, LetterResult.MISPLACED);
@@ -49,8 +53,8 @@ public class WordleGame {
             }
         }
 
-        Guess guessResult = new Guess(guessText, result);
-        attempts.add(guessResult);
+        Guess guessResult = new Guess(word, result);
+        attempts.set(currentAttempt++, guessResult);
         return guessResult;
     }
 
@@ -80,7 +84,7 @@ public class WordleGame {
     }
 
     public boolean isGameOver() {
-        return isGameWon() || attempts.size() >= maxAttempts;
+        return isGameWon() || currentAttempt >= maxAttempts;
     }
 
     public List<Guess> getAttempts() {

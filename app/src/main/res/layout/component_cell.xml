@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="cell"
+            type="com.hinski.wordelapplication.model.CharResult" />
+    </data>
+
+
+    <TextView
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:background="@{cell.backgroundColor}"
+        android:gravity="center"
+        android:text="@{cell.letter.toString()}"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        tools:text="A" />
+</layout>
