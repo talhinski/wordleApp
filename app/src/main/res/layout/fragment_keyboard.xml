@@ -11,17 +11,18 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
         android:gravity="center"
         android:orientation="vertical"
-        android:padding="8dp"
-        android:layout_marginBottom="32dp">
+        android:padding="8dp">
 
         <!-- First Row -->
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layoutDirection="rtl">
+            android:layoutDirection="rtl"
+            android:orientation="horizontal">
+
             <Button
                 style="@style/KeyboardButton"
                 android:tag="Delete"
@@ -33,22 +34,18 @@
 
             <Button
                 style="@style/KeyboardButton"
-                android:background="@color/correct"
                 android:text="ו" />
 
             <Button
                 style="@style/KeyboardButton"
-                android:background="@color/correct"
                 android:text="ט" />
 
             <Button
                 style="@style/KeyboardButton"
-                android:background="@color/incorrect"
                 android:text="א" />
 
             <Button
                 style="@style/KeyboardButton"
-                android:background="@color/misplaced"
                 android:text="ר" />
 
             <Button
@@ -61,8 +58,8 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layoutDirection="rtl">
+            android:layoutDirection="rtl"
+            android:orientation="horizontal">
 
             <Button
                 style="@style/KeyboardButton"
@@ -70,7 +67,6 @@
 
             <Button
                 style="@style/KeyboardButton"
-                android:background="@color/correct"
                 android:text="ח" />
 
             <Button
@@ -102,9 +98,8 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
             android:layoutDirection="rtl"
-            >
+            android:orientation="horizontal">
 
             <Button
                 style="@style/KeyboardButton"
@@ -121,7 +116,6 @@
 
             <Button
                 style="@style/KeyboardButton"
-                android:background="@color/correct"
                 android:text="מ" />
 
             <Button

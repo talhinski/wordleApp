@@ -3,6 +3,8 @@ package com.hinski.wordelapplication.model;
 import androidx.databinding.ObservableField;
 import androidx.databinding.ObservableInt;
 
+import com.hinski.wordelapplication.util.BackgroundColorCalculator;
+
 import java.util.Objects;
 
 public class CharResult {
@@ -34,19 +36,7 @@ public class CharResult {
     }
 
     private void updateBackgroundColor() {
-        switch (Objects.requireNonNull(result.get())) {
-            case CORRECT:
-                backgroundColor.set(0xFF6AAA64); // green
-                break;
-            case MISPLACED:
-                backgroundColor.set(0xFFC9B458); // yellow
-                break;
-            case INCORRECT:
-                backgroundColor.set(0xFF787C7E); // gray
-                break;
-            default:
-                backgroundColor.set(0xFFFFFFFF); // default color white
-                break;
-        }
+        LetterResult currentResult = Objects.requireNonNull(result.get());
+        backgroundColor.set(BackgroundColorCalculator.calculateBackgroundColor(currentResult));
     }
 }

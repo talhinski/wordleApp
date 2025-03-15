@@ -3,11 +3,15 @@ package com.hinski.wordelapplication.logic;
 import android.content.res.Resources;
 import android.util.Log; // Add this import
 
+import com.hinski.wordelapplication.model.CharResult;
 import com.hinski.wordelapplication.model.Guess;
+import com.hinski.wordelapplication.model.LetterResult;
 import com.hinski.wordelapplication.model.WordleGame;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.Set;
 
@@ -92,4 +96,24 @@ public class WordleLogic {
         return game.getAttempts();
     }
 
+    public Map<Character, LetterResult> getUsedLetters() {
+        Map<Character, LetterResult> usedLetters = new HashMap<>();
+        for (int i = 0; i < game.getCurrentAttempt(); i++) {
+            Guess guess = game.getAttempts().get(i);
+            for (CharResult result : guess.getCharResults()) {
+                if (result.result.get() != LetterResult.EMPTY) {
+                    Character letter = result.letter.get();
+                    if (!usedLetters.containsKey(letter)) {
+                        usedLetters.put(letter, result.result.get());
+                    } else {
+                        LetterResult currentResult = usedLetters.get(letter);
+                        if (currentResult == LetterResult.MISPLACED && result.result.get() == LetterResult.CORRECT) {
+                            usedLetters.put(letter, result.result.get());
+                        }
+                    }
+                }
+            }
+        }
+        return usedLetters;
+    }
 }

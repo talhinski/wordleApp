@@ -14,6 +14,10 @@ import androidx.lifecycle.ViewModelProvider;
 import com.hinski.wordelapplication.databinding.FragmentKeyboardBinding;
 import com.hinski.wordelapplication.viewmodel.GameViewModel;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+
 public class KeyboardFragment extends Fragment {
 
     private FragmentKeyboardBinding binding;
@@ -25,7 +29,7 @@ public class KeyboardFragment extends Fragment {
         viewModel = new ViewModelProvider(requireActivity()).get(GameViewModel.class);
         binding.setViewModel(viewModel);
         binding.setLifecycleOwner(this);
-
+        observeUsedLetters();
         return binding.getRoot();
     }
 
@@ -36,28 +40,51 @@ public class KeyboardFragment extends Fragment {
     }
 
     private void setupKeyboardListeners(@NonNull View view) {
-        ViewGroup rootLayout = (ViewGroup) view;
-        setButtonListenersRecursively(rootLayout);
+        for (Button button : getAllButtons((ViewGroup) view)) {
+            button.setOnClickListener(v -> {
+                String buttonTag = button.getTag() != null ? button.getTag().toString() : "";
+                String buttonText = button.getText().toString();
+                if (buttonTag.equals("Enter")) {
+                    viewModel.submitCurrentGuess();
+                } else if (buttonTag.equals("Delete")) {
+                    viewModel.deleteChar();
+                } else if (buttonText.length() == 1) {
+                    viewModel.enterChar(buttonText.charAt(0));
+                }
+            });
+        }
     }
 
-    private void setButtonListenersRecursively(ViewGroup parent) {
+    private void observeUsedLetters() {
+        viewModel.getUsedLetters().observe(getViewLifecycleOwner(), this::updateButtonBackgrounds);
+    }
+
+    private void updateButtonBackgrounds(Map<Character, Integer> usedLetters) {
+        for (Button button : getAllButtons((ViewGroup) getView())) {
+            String buttonText = button.getText().toString();
+            if (buttonText.length() == 1) {
+                char letter = buttonText.charAt(0);
+                if (usedLetters.containsKey(letter)) {
+                    Integer color = usedLetters.get(letter);
+                    button.setBackgroundColor(color);
+                }
+            }
+        }
+    }
+
+    private Iterable<Button> getAllButtons(ViewGroup parent) {
+        List<Button> buttons = new ArrayList<>();
+        getAllButtonsRecursively(parent, buttons);
+        return buttons;
+    }
+
+    private void getAllButtonsRecursively(ViewGroup parent, List<Button> buttons) {
         for (int i = 0; i < parent.getChildCount(); i++) {
             View child = parent.getChildAt(i);
             if (child instanceof Button) {
-                Button button = (Button) child;
-                button.setOnClickListener(v -> {
-                    String buttonTag = button.getTag() != null ? button.getTag().toString() : "";
-                    String buttonText = button.getText().toString();
-                    if (buttonTag.equals("Enter")) {
-                        viewModel.submitCurrentGuess();
-                    } else if (buttonTag.equals("Delete")) {
-                        viewModel.deleteChar();
-                    } else if (buttonText.length() == 1) {
-                        viewModel.enterChar(buttonText.charAt(0));
-                    }
-                });
+                buttons.add((Button) child);
             } else if (child instanceof ViewGroup) {
-                setButtonListenersRecursively((ViewGroup) child);
+                getAllButtonsRecursively((ViewGroup) child, buttons);
             }
         }
     }

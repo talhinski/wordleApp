@@ -3,20 +3,28 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
+
         <variable
             name="cell"
             type="com.hinski.wordelapplication.model.CharResult" />
     </data>
 
-
-    <TextView
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_margin="4dp"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
-        android:background="@{cell.backgroundColor}"
-        android:gravity="center"
-        android:text="@{cell.letter.toString()}"
-        android:textSize="20sp"
-        android:textStyle="bold"
-        tools:text="A" />
+        android:background="@drawable/cell_border"
+        android:padding="4dp">
+
+        <TextView
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+
+            android:background="@{cell.backgroundColor}"
+            android:gravity="center"
+            android:text="@{cell.letter.toString()}"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            tools:text="A" />
+    </FrameLayout>
 </layout>
