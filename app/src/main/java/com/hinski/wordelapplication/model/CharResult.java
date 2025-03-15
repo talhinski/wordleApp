@@ -5,9 +5,12 @@ import androidx.databinding.ObservableField;
 import java.util.Objects;
 
 public class CharResult {
-    public final ObservableField<Character> letter = new ObservableField<>('X');
+    public final ObservableField<Character> letter = new ObservableField<>('\0');
     public final ObservableField<LetterResult> result = new ObservableField<>(LetterResult.EMPTY);
 
+    public CharResult() {
+
+    }
 
     public CharResult(char character, LetterResult result) {
         this.letter.set(character);
