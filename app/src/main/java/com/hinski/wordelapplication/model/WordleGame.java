@@ -1,7 +1,6 @@
 package com.hinski.wordelapplication.model;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 
@@ -12,6 +11,18 @@ public class WordleGame {
     private int currentAttempt = 0;
 
     private int currentChar = 0;
+
+    public int getCurrentAttempt() {
+        return currentAttempt;
+    }
+
+    public int getCurrentChar() {
+        return currentChar;
+    }
+
+    public int getMaxAttempts() {
+        return maxAttempts;
+    }
 
     public WordleGame(String secretWord, int maxAttempts) {
         this.secretWord = secretWord; // removed toLowerCase()
@@ -56,9 +67,7 @@ public class WordleGame {
             }
         }
 
-        Guess guessResult = new Guess(word, result);
-        attempts.set(currentAttempt++, guessResult);
-        return guessResult;
+        return new Guess(word, result);
     }
 
     private int indexOfChar(char[] array, char letter) {
@@ -94,7 +103,7 @@ public class WordleGame {
         return attempts;
     }
 
-    boolean canAddCharToCurrentGuess() {
+    public boolean canAddCharToCurrentGuess() {
         return currentAttempt < maxAttempts &&
                 currentChar < secretWord.length();
     }
@@ -107,5 +116,30 @@ public class WordleGame {
         currentGuess.getCharResults().get(currentChar).letter.set(c);
         currentChar++;
         return currentGuess;
+    }
+
+    public boolean canDeleteCharFromCurrentGuess() {
+        return currentChar > 0;
+    }
+
+    public Guess deleteCharFromCurrentGuess() {
+        if (!canDeleteCharFromCurrentGuess()) {
+            throw new IllegalStateException("Cannot delete more characters from current guess");
+        }
+        Guess currentGuess = attempts.get(currentAttempt);
+        currentGuess.getCharResults().get(--currentChar).letter.set('\0');
+        return currentGuess;
+    }
+
+    public Guess getCurrentGuess() {
+        return attempts.get(currentAttempt);
+    }
+
+    public void submitCurrentGuess() {
+        Guess currentGuess = attempts.get(currentAttempt);
+        Guess result = guess(currentGuess.getWord());
+        currentGuess.updateGuess(result);
+        currentAttempt++;
+        currentChar = 0;
     }
 }

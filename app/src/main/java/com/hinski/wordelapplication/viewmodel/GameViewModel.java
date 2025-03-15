@@ -19,12 +19,7 @@ public class GameViewModel extends AndroidViewModel {
     public GameViewModel(@NonNull Application application) {
         super(application);
         logic = new WordleLogic(application.getResources());
-        attempts.setValue(logic.getGame().getAttempts());
-    }
-
-    public void processGuess(String guess) {
-        logic.processGuess(guess);
-        attempts.setValue(logic.getGame().getAttempts());
+        attempts.setValue(logic.getAttempts());
     }
 
     public boolean isGameOver() {
@@ -43,13 +38,18 @@ public class GameViewModel extends AndroidViewModel {
         attempts.setValue(guesses);
     }
 
-    public void testCurrentGuess() {
+    public void submitCurrentGuess() {
+        if(logic.canSubmitCurrentGuess())
+            logic.submitCurrentGuess();
     }
 
     public void deleteChar() {
+        if(logic.canDeleteCharFromCurrentGuess())
+            logic.deleteCharFromCurrentGuess();
     }
 
     public void enterChar(char c) {
-        logic.getGame().addCharToCurrentGuess(c);
+        if (logic.canAddCharToCurrentGuess())
+            logic.addCharToCurrentGuess(c);
     }
 }

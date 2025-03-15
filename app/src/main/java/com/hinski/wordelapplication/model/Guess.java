@@ -27,4 +27,21 @@ public class Guess {
     public ObservableList<CharResult> getCharResults() {
         return charResults;
     }
+
+    public String getWord() {
+        StringBuilder word = new StringBuilder();
+        for (CharResult charResult : charResults) {
+            word.append(charResult.letter.get());
+        }
+        return word.toString();
+    }
+
+    public void updateGuess(Guess guess) {
+        for (int i = 0; i < charResults.size(); i++) {
+            CharResult current = charResults.get(i);
+            CharResult updated = guess.charResults.get(i);
+            current.letter.set(updated.letter.get());
+            current.result.set(updated.result.get());
+        }
+    }
 }

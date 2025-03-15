@@ -1,17 +1,18 @@
 package com.hinski.wordelapplication.logic;
 
 import android.content.res.Resources;
-
+import android.util.Log; // Add this import
 
 import com.hinski.wordelapplication.model.Guess;
 import com.hinski.wordelapplication.model.WordleGame;
 
-import java.util.Set;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
+import java.util.Set;
 
 public class WordleLogic {
+    private static final String TAG = "WordleLogic"; // Add this line
     private final WordleGame game;
     // Initialize vocabulary from resource via WordelWords.
     private final Set<String> vocabulary;
@@ -25,8 +26,8 @@ public class WordleLogic {
         List<String> vocabList = new ArrayList<>(vocabulary);
         String secretWord = vocabList.get(new Random().nextInt(vocabList.size()));
         game = new WordleGame(secretWord);
+        Log.i(TAG, "Secret word: " + secretWord); // Add this line
     }
-
 
     public boolean isValidWord(String word) {
         return vocabulary.contains(word);
@@ -59,8 +60,36 @@ public class WordleLogic {
     public boolean isGameWon() {
         return game.isGameWon();
     }
-    public WordleGame getGame() {
-        return game;
+
+    public boolean canAddCharToCurrentGuess() {
+        return game.canAddCharToCurrentGuess();
+    }
+
+    public Guess addCharToCurrentGuess(char c) {
+        return game.addCharToCurrentGuess(c);
+    }
+
+    public boolean canDeleteCharFromCurrentGuess() {
+        return game.canDeleteCharFromCurrentGuess();
+    }
+
+    public Guess deleteCharFromCurrentGuess() {
+        return game.deleteCharFromCurrentGuess();
+    }
+
+    public boolean canSubmitCurrentGuess() {
+        return vocabulary.contains(game.getCurrentGuess().getWord());
+    }
+
+    public void submitCurrentGuess() {
+        if (!canSubmitCurrentGuess()) {
+            throw new IllegalStateException("Cannot submit current guess");
+        }
+        game.submitCurrentGuess();
+    }
+
+    public List<Guess> getAttempts() {
+        return game.getAttempts();
     }
 
 }

@@ -11,7 +11,6 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import com.hinski.wordelapplication.R;
 import com.hinski.wordelapplication.databinding.FragmentKeyboardBinding;
 import com.hinski.wordelapplication.viewmodel.GameViewModel;
 
@@ -47,10 +46,11 @@ public class KeyboardFragment extends Fragment {
             if (child instanceof Button) {
                 Button button = (Button) child;
                 button.setOnClickListener(v -> {
+                    String buttonTag = button.getTag() != null ? button.getTag().toString() : "";
                     String buttonText = button.getText().toString();
-                    if (buttonText.equals("Enter")) {
-                        viewModel.testCurrentGuess();
-                    } else if (buttonText.equals("Delete")) {
+                    if (buttonTag.equals("Enter")) {
+                        viewModel.submitCurrentGuess();
+                    } else if (buttonTag.equals("Delete")) {
                         viewModel.deleteChar();
                     } else if (buttonText.length() == 1) {
                         viewModel.enterChar(buttonText.charAt(0));

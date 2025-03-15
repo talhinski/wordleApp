@@ -10,14 +10,15 @@
     <style name="Theme.WordelApplication" parent="Base.Theme.WordelApplication"></style>
 
     <style name="KeyboardButton" parent="Widget.AppCompat.Button">
-        <item name="android:layout_width">36dp</item>
-        <item name="android:layout_height">36dp</item>
+        <item name="android:layout_width">32dp</item>
+        <item name="android:layout_height">32dp</item>
         <item name="android:background">@color/keyboard_default</item>
         <item name="android:textColor">@android:color/white</item>
-        <item name="android:textSize">16sp</item>
+        <item name="android:textSize">22sp</item>
         <item name="android:gravity">center</item>
         <item name="android:padding">4dp</item>
         <item name="android:layout_margin">4dp</item>
+        <item name="android:layout_marginBottom">8dp</item>
     </style>
 
 
