@@ -11,6 +11,8 @@ public class WordleGame {
     private final List<Guess> attempts = new ArrayList<>();
     private int currentAttempt = 0;
 
+    private int currentChar = 0;
+
     public WordleGame(String secretWord, int maxAttempts) {
         this.secretWord = secretWord; // removed toLowerCase()
         this.maxAttempts = maxAttempts;
@@ -90,5 +92,20 @@ public class WordleGame {
 
     public List<Guess> getAttempts() {
         return attempts;
+    }
+
+    boolean canAddCharToCurrentGuess() {
+        return currentAttempt < maxAttempts &&
+                currentChar < secretWord.length();
+    }
+
+    public Guess addCharToCurrentGuess(char c) {
+        if (!canAddCharToCurrentGuess()) {
+            throw new IllegalStateException("Cannot add more characters to current guess");
+        }
+        Guess currentGuess = attempts.get(currentAttempt);
+        currentGuess.getCharResults().get(currentChar).letter.set(c);
+        currentChar++;
+        return currentGuess;
     }
 }

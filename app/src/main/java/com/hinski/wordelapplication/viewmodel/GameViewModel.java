@@ -1,11 +1,14 @@
 package com.hinski.wordelapplication.viewmodel;
 
 import android.app.Application;
+
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.MutableLiveData;
+
 import com.hinski.wordelapplication.logic.WordleLogic;
 import com.hinski.wordelapplication.model.Guess;
+
 import java.util.List;
 
 public class GameViewModel extends AndroidViewModel {
@@ -38,5 +41,15 @@ public class GameViewModel extends AndroidViewModel {
 
     public void setGuesses(List<Guess> guesses) {
         attempts.setValue(guesses);
+    }
+
+    public void testCurrentGuess() {
+    }
+
+    public void deleteChar() {
+    }
+
+    public void enterChar(char c) {
+        logic.getGame().addCharToCurrentGuess(c);
     }
 }

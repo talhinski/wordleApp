@@ -10,6 +10,7 @@
 
 
     <TextView
+        android:layout_margin="4dp"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:background="@{cell.backgroundColor}"

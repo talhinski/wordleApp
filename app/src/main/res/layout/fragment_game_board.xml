@@ -9,7 +9,8 @@
         android:id="@+id/game_board"
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:padding="16dp">
         <!-- Dynamic rows will be added here -->
     </LinearLayout>
 </layout>
