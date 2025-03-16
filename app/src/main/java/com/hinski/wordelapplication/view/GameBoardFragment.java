@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -39,5 +40,10 @@ public class GameBoardFragment extends Fragment {
                 binding.gameBoard.addView(gameRowComponent);
             }
         });
+        gameViewModel.invalidWordEvent
+                .observe(getViewLifecycleOwner(),
+                        message -> Toast.makeText(getContext(), message, Toast.LENGTH_SHORT)
+                                .show()
+                );
     }
 }

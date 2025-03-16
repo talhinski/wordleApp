@@ -9,7 +9,6 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.hinski.wordelapplication.logic.WordleLogic;
 import com.hinski.wordelapplication.model.Guess;
-import com.hinski.wordelapplication.model.LetterResult;
 import com.hinski.wordelapplication.util.BackgroundColorCalculator;
 
 import java.util.HashMap;
@@ -20,7 +19,10 @@ public class GameViewModel extends AndroidViewModel {
 
     private final WordleLogic logic;
     public MutableLiveData<List<Guess>> attempts = new MutableLiveData<>();
+    public final MutableLiveData<String> invalidWordEvent = new MutableLiveData<>();
+
     private final MutableLiveData<Map<Character, Integer>> usedLetters = new MutableLiveData<>(new HashMap<>());
+
 
     public GameViewModel(@NonNull Application application) {
         super(application);
@@ -52,6 +54,8 @@ public class GameViewModel extends AndroidViewModel {
         if (logic.canSubmitCurrentGuess()) {
             logic.submitCurrentGuess();
             updateUsedLetters();
+        } else {
+            invalidWordEvent.postValue("המילה אינה קיימת");
         }
     }
 
