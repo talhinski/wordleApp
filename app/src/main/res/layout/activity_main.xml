@@ -19,30 +19,16 @@
         android:layout_height="match_parent"
         android:padding="16dp">
 
-        <TextView
-            android:id="@+id/secretWordHint"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Guess the word!" />
-
-        <EditText
-            android:id="@+id/guessInput"
+        <FrameLayout
+            android:id="@+id/game_board_container"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Enter your guess" />
+            android:layout_height="0dp"
+            android:layout_weight="1"/>
 
-        <Button
-            android:id="@+id/submitButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Submit Guess" />
-
-        <TextView
-            android:id="@+id/resultDisplay"
+        <FrameLayout
+            android:id="@+id/keyboard_container"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Results appear here"
-            android:paddingTop="16dp"/>
+            android:layout_height="wrap_content"/>
     </LinearLayout>
   </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

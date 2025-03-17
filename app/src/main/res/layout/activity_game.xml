@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.hinski.wordelapplication.viewmodel.GameViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <include
+            layout="@layout/wordle_row"
+            android:id="@+id/wordle_row_1"
+            app:guess="@{viewModel.guesses.get(0)}" />
+
+        <include
+            layout="@layout/wordle_row"
+            android:id="@+id/wordle_row_2"
+            app:guess="@{viewModel.guesses.get(1)}" />
+
+        <include
+            layout="@layout/wordle_row"
+            android:id="@+id/wordle_row_3"
+            app:guess="@{viewModel.guesses.get(2)}" />
+
+        <include
+            layout="@layout/wordle_row"
+            android:id="@+id/wordle_row_4"
+            app:guess="@{viewModel.guesses.get(3)}" />
+
+        <include
+            layout="@layout/wordle_row"
+            android:id="@+id/wordle_row_5"
+            app:guess="@{viewModel.guesses.get(4)}" />
+
+        <include
+            layout="@layout/wordle_row"
+            android:id="@+id/wordle_row_6"
+            app:guess="@{viewModel.guesses.get(5)}" />
+
+    </LinearLayout>
+</layout>

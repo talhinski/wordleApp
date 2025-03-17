@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="viewModel"
+            type="com.hinski.wordelapplication.viewmodel.GameViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="8dp">
+
+        <!-- First Row -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layoutDirection="rtl"
+            android:orientation="horizontal">
+
+            <Button
+                style="@style/KeyboardButton"
+                android:tag="Delete"
+                android:text="⌫" />
+
+            <Button
+                style="@style/KeyboardButton"
+                android:text="פ" />
+
+            <Button
+                style="@style/KeyboardButton"
+                android:text="ו" />
+
+            <Button
+                style="@style/KeyboardButton"
+                android:text="ט" />
+
+            <Button
+                style="@style/KeyboardButton"
+                android:text="א" />
+
+            <Button
+                style="@style/KeyboardButton"
+                android:text="ר" />
+
+            <Button
+                style="@style/KeyboardButton"
+                android:text="ק" />
+
+        </LinearLayout>
+
+        <!-- Second Row -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layoutDirection="rtl"
+            android:orientation="horizontal">
+
+            <Button
+                style="@style/KeyboardButton"
+                android:text="ל" />
+
+            <Button
+                style="@style/KeyboardButton"
+                android:text="ח" />
+
+            <Button
+                style="@style/KeyboardButton"
+                android:text="י" />
+
+            <Button
+                style="@style/KeyboardButton"
+                android:text="ע" />
+
+            <Button
+                style="@style/KeyboardButton"
+                android:text="כ" />
+
+            <Button
+                style="@style/KeyboardButton"
+                android:text="ג" />
+
+            <Button
+                style="@style/KeyboardButton"
+                android:text="ד" />
+
+            <Button
+                style="@style/KeyboardButton"
+                android:text="ש" />
+        </LinearLayout>
+
+        <!-- Third Row -->
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layoutDirection="rtl"
+            android:orientation="horizontal">
+
+            <Button
+                style="@style/KeyboardButton"
+                android:tag="Enter"
+                android:text="↵" />
+
+            <Button
+                style="@style/KeyboardButton"
+                android:text="ת" />
+
+            <Button
+                style="@style/KeyboardButton"
+                android:text="צ" />
+
+            <Button
+                style="@style/KeyboardButton"
+                android:text="מ" />
+
+            <Button
+                style="@style/KeyboardButton"
+                android:text="נ" />
+
+            <Button
+                style="@style/KeyboardButton"
+                android:text="ה" />
+
+            <Button
+                style="@style/KeyboardButton"
+                android:text="ב" />
+
+            <Button
+                style="@style/KeyboardButton"
+                android:text="ס" />
+
+            <Button
+                style="@style/KeyboardButton"
+                android:text="ז" />
+        </LinearLayout>
+    </LinearLayout>
+</layout>
