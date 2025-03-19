@@ -142,4 +142,6 @@ public class WordleGame {
         currentAttempt++;
         currentChar = 0;
     }
+
+
 }

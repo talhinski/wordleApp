@@ -20,7 +20,8 @@ public class GameViewModel extends AndroidViewModel {
     private final WordleLogic logic;
     public MutableLiveData<List<Guess>> attempts = new MutableLiveData<>();
     public final MutableLiveData<String> invalidWordEvent = new MutableLiveData<>();
-
+    public final MutableLiveData<String> gameOverEvent = new MutableLiveData<>();
+    public final MutableLiveData<String> gameWonEvent = new MutableLiveData<>();
     private final MutableLiveData<Map<Character, Integer>> usedLetters = new MutableLiveData<>(new HashMap<>());
 
 
@@ -54,8 +55,25 @@ public class GameViewModel extends AndroidViewModel {
         if (logic.canSubmitCurrentGuess()) {
             logic.submitCurrentGuess();
             updateUsedLetters();
+            if (!checkGameWon())
+                checkGameOver();
         } else {
             invalidWordEvent.postValue("המילה אינה קיימת");
+        }
+    }
+
+    private void checkGameOver() {
+        if (logic.isGameOver() ) {
+            gameOverEvent.postValue("המשחק נגמר");
+        }
+    }
+
+    private boolean checkGameWon() {
+        if (logic.isGameWon()) {
+            gameWonEvent.postValue("ניצחת!");
+            return true;
+        } else {
+            return false;
         }
     }
 
