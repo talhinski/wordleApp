@@ -8,12 +8,12 @@ import androidx.fragment.app.FragmentTransaction;
 import com.hinski.wordelapplication.view.GameBoardFragment;
 import com.hinski.wordelapplication.view.KeyboardFragment;
 
-public class MainActivity extends AppCompatActivity {
+public class GameActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.game_activity);
 
         if (savedInstanceState == null) {
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();

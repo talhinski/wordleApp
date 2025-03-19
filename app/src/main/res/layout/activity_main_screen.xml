@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="#FFFFFF"
+    android:padding="24dp">
+
+    <!-- Game Title -->
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="WORDLE"
+        android:textSize="48sp"
+        android:textColor="#000000"
+        android:textStyle="bold"
+        android:layout_marginTop="80dp"
+        android:layout_marginBottom="60dp"
+        android:letterSpacing="0.1"
+        android:gravity="center_horizontal"
+        android:layout_gravity="center_horizontal" />
+
+    <!-- New Game Button -->
+    <Button
+        android:id="@+id/button_new_game"
+        android:layout_width="250dp"
+        android:layout_height="60dp"
+        android:text="משחק חדש"
+        android:textSize="20sp"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#6AAA64"
+        android:layout_marginBottom="20dp"
+        android:padding="10dp"
+        android:textStyle="bold" />
+
+    <!-- Statistics Button -->
+    <Button
+        android:id="@+id/button_statistics"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        android:text="סטטיסטיקה"
+        android:textStyle="bold"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#787C7E"
+        android:padding="10dp"
+        android:textSize="16sp" />
+
+</LinearLayout>
