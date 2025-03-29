@@ -1,58 +1,49 @@
 package com.hinski.wordelapplication;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import androidx.activity.EdgeToEdge;
+
 import androidx.appcompat.app.AppCompatActivity;
-import android.widget.Button;
-import android.widget.TextView;
+import androidx.lifecycle.ViewModelProvider;
+
+import com.hinski.wordelapplication.databinding.ActivityMainScreenBinding;
+import com.hinski.wordelapplication.viewmodel.MainScreenViewModel;
 
 public class MainScreenActivity extends AppCompatActivity {
+
+    private ActivityMainScreenBinding binding;
+    private MainScreenViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_main_screen);
+        binding = ActivityMainScreenBinding.inflate(getLayoutInflater());
+        setContentView(binding.getRoot());
 
-        SharedPreferences sharedPreferences = getSharedPreferences("user_prefs", MODE_PRIVATE);
-        String userName = sharedPreferences.getString("user_email", null);
+        viewModel = new ViewModelProvider(this).get(MainScreenViewModel.class);
+        binding.setViewModel(viewModel);
+        binding.setLifecycleOwner(this);
 
-        if (userName == null) {
-            Intent intent = new Intent(this, LoginActivity.class);
-            startActivity(intent);
-            finish();
-        } else {
-            TextView greetingTextView = findViewById(R.id.greeting_text_view);
-            greetingTextView.setText("Welcome, " + userName);
-        }
-
-        this.findViewById(R.id.button_new_game).setOnClickListener(v -> {
-            Intent intent = new Intent(this, GameActivity.class);
-            startActivity(intent);
+        viewModel.navigateToLogin.observe(this, navigate -> {
+            if (navigate) {
+                Intent intent = new Intent(MainScreenActivity.this, LoginActivity.class);
+                startActivity(intent);
+                finish();
+            }
         });
 
-        Button registerButton = findViewById(R.id.button_register);
-        registerButton.setOnClickListener(v -> {
-            Intent intent = new Intent(MainScreenActivity.this, RegisterActivity.class);
-            startActivity(intent);
+        viewModel.navigateToRegister.observe(this, navigate -> {
+            if (navigate) {
+                Intent intent = new Intent(MainScreenActivity.this, RegisterActivity.class);
+                startActivity(intent);
+            }
         });
 
-        Button loginButton = findViewById(R.id.button_login);
-        loginButton.setOnClickListener(v -> {
-            Intent intent = new Intent(MainScreenActivity.this, LoginActivity.class);
-            startActivity(intent);
-        });
-
-        Button logoutButton = findViewById(R.id.button_logout);
-        logoutButton.setOnClickListener(v -> {
-            SharedPreferences.Editor editor = sharedPreferences.edit();
-            editor.clear();
-            editor.apply();
-            Intent intent = new Intent(MainScreenActivity.this, LoginActivity.class);
-            startActivity(intent);
-            finish();
+        viewModel.startGame.observe(this, navigate -> {
+            if (navigate) {
+                Intent intent = new Intent(MainScreenActivity.this, GameActivity.class);
+                startActivity(intent);
+            }
         });
     }
 }

@@ -1,86 +1,92 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:gravity="center"
-    android:background="#FFFFFF"
-    android:padding="24dp">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- Game Title -->
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="WORDLE"
-        android:textSize="48sp"
-        android:textColor="#000000"
-        android:textStyle="bold"
-        android:layout_marginTop="80dp"
-        android:layout_marginBottom="60dp"
-        android:letterSpacing="0.1"
-        android:gravity="center_horizontal"
-        android:layout_gravity="center_horizontal" />
+    <data>
+        <variable
+            name="viewModel"
+            type="com.hinski.wordelapplication.viewmodel.MainScreenViewModel" />
+    </data>
 
-    <!-- Greeting Text View -->
-    <TextView
-        android:id="@+id/greeting_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:textColor="#000000"
-        android:layout_marginBottom="20dp"
-        android:gravity="center_horizontal"
-        android:layout_gravity="center_horizontal" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:background="#FFFFFF"
+        android:padding="24dp">
 
-    <!-- New Game Button -->
-    <Button
-        android:id="@+id/button_new_game"
-        android:layout_width="250dp"
-        android:layout_height="60dp"
-        android:text="משחק חדש"
-        android:textSize="20sp"
-        android:textColor="#FFFFFF"
-        android:backgroundTint="#6AAA64"
-        android:layout_marginBottom="20dp"
-        android:padding="10dp"
-        android:textStyle="bold" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="WORDLE"
+            android:textSize="48sp"
+            android:textColor="#000000"
+            android:textStyle="bold"
+            android:layout_marginTop="80dp"
+            android:layout_marginBottom="60dp"
+            android:letterSpacing="0.1"
+            android:gravity="center_horizontal"
+            android:layout_gravity="center_horizontal" />
 
-    <!-- Statistics Button -->
-    <Button
-        android:id="@+id/button_statistics"
-        android:layout_width="250dp"
-        android:layout_height="wrap_content"
-        android:text="סטטיסטיקה"
-        android:textStyle="bold"
-        android:textColor="#FFFFFF"
-        android:backgroundTint="#787C7E"
-        android:padding="10dp"
-        android:textSize="16sp" />
+        <TextView
+            android:id="@+id/greeting_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="20sp"
+            android:textColor="#000000"
+            android:layout_marginBottom="20dp"
+            android:gravity="center_horizontal"
+            android:layout_gravity="center_horizontal"
+            android:text="@{viewModel.userName}" />
 
-    <!-- Register Button -->
-    <Button
-        android:id="@+id/button_register"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Register"
-        android:layout_marginTop="16dp"
-        android:layout_gravity="center" />
+        <Button
+            android:id="@+id/button_new_game"
+            android:layout_width="250dp"
+            android:layout_height="60dp"
+            android:text="משחק חדש"
+            android:textSize="20sp"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#6AAA64"
+            android:layout_marginBottom="20dp"
+            android:padding="10dp"
+            android:textStyle="bold"
+            android:onClick="@{() -> viewModel.startNewGame()}" />
 
-    <!-- Login Button -->
-    <Button
-        android:id="@+id/button_login"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Login"
-        android:layout_marginTop="16dp"
-        android:layout_gravity="center" />
+        <Button
+            android:id="@+id/button_statistics"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content"
+            android:text="סטטיסטיקה"
+            android:textStyle="bold"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#787C7E"
+            android:padding="10dp"
+            android:textSize="16sp" />
 
-    <!-- Logout Button -->
-    <Button
-        android:id="@+id/button_logout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Logout"
-        android:layout_marginTop="16dp"
-        android:layout_gravity="center" />
+        <Button
+            android:id="@+id/button_register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Register"
+            android:layout_marginTop="16dp"
+            android:layout_gravity="center"
+            android:onClick="@{() -> viewModel.register()}" />
 
-</LinearLayout>
+        <Button
+            android:id="@+id/button_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Login"
+            android:layout_marginTop="16dp"
+            android:layout_gravity="center" />
+
+        <Button
+            android:id="@+id/button_logout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Logout"
+            android:layout_marginTop="16dp"
+            android:layout_gravity="center"
+            android:onClick="@{() -> viewModel.logout()}" />
+    </LinearLayout>
+</layout>
