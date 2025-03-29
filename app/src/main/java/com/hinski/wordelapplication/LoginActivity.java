@@ -28,5 +28,12 @@ public class LoginActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        viewModel.getLoginSuccess().observe(this, success -> {
+            if (success) {
+                Intent intent = new Intent(LoginActivity.this, MainScreenActivity.class);
+                startActivity(intent);
+                finish();
+            }
+        });
     }
 }
