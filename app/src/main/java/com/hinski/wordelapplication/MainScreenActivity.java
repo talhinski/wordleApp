@@ -6,6 +6,7 @@ import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.widget.Button;
 
 public class MainScreenActivity extends AppCompatActivity {
 
@@ -20,5 +21,15 @@ public class MainScreenActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
+        Button registerButton = findViewById(R.id.button_register);
+        registerButton.setOnClickListener(v -> {
+            Intent intent = new Intent(MainScreenActivity.this, RegisterActivity.class);
+            startActivity(intent);
+        });
+        Button loginButton = findViewById(R.id.button_login);
+        loginButton.setOnClickListener(v -> {
+            Intent intent = new Intent(MainScreenActivity.this, LoginActivity.class);
+            startActivity(intent);
+        });
     }
 }
