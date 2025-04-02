@@ -18,11 +18,8 @@ public class GameActivity extends AppCompatActivity {
         setContentView(R.layout.game_activity);
         
         Button returnButton = findViewById(R.id.btn_return);
-        returnButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish(); // return to the main game screen
-            }
+        returnButton.setOnClickListener(v -> {
+            finish(); // return to the main game screen
         });
 
         if (savedInstanceState == null) {

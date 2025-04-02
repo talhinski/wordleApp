@@ -10,6 +10,7 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.HashMap;
@@ -44,6 +45,8 @@ public class RegisterViewModel extends AndroidViewModel {
                             FirebaseUser user = auth.getCurrentUser();
                             if (user != null) {
                                 saveUserToFirestore(user);
+                                user.updateProfile(new UserProfileChangeRequest.Builder().setDisplayName(userName).build());
+                                auth.updateCurrentUser(user);
                             }
                             Toast.makeText(getApplication(), "Registration successful", Toast.LENGTH_SHORT).show();
                         } else {
@@ -63,8 +66,7 @@ public class RegisterViewModel extends AndroidViewModel {
         } else if (!android.util.Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
             emailError.setValue("Invalid email address");
             isValid.set(false);
-        }
-        else {
+        } else {
             //noinspection deprecation
             auth.fetchSignInMethodsForEmail(email)
                     .addOnCompleteListener(task -> {

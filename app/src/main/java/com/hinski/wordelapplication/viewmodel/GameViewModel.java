@@ -1,12 +1,20 @@
 package com.hinski.wordelapplication.viewmodel;
 
+import static android.content.Context.MODE_PRIVATE;
+
 import android.app.Application;
+import android.content.SharedPreferences;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.google.firebase.Timestamp;
+
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.hinski.wordelapplication.logic.WordleLogic;
 import com.hinski.wordelapplication.model.Guess;
 import com.hinski.wordelapplication.util.BackgroundColorCalculator;
@@ -14,6 +22,9 @@ import com.hinski.wordelapplication.util.BackgroundColorCalculator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import java.time.Duration;
+import java.time.Instant;
 
 public class GameViewModel extends AndroidViewModel {
 
@@ -23,12 +34,17 @@ public class GameViewModel extends AndroidViewModel {
     public final MutableLiveData<String> gameOverEvent = new MutableLiveData<>();
     public final MutableLiveData<String> gameWonEvent = new MutableLiveData<>();
     private final MutableLiveData<Map<Character, Integer>> usedLetters = new MutableLiveData<>(new HashMap<>());
+    private final FirebaseFirestore db;
 
+    private final String userId;
 
     public GameViewModel(@NonNull Application application) {
         super(application);
         logic = new WordleLogic(application.getResources());
         attempts.setValue(logic.getAttempts());
+        db = FirebaseFirestore.getInstance();
+        SharedPreferences sharedPreferences = application.getSharedPreferences("user_prefs", MODE_PRIVATE);
+        userId = sharedPreferences.getString("user_id", null);
     }
 
     public boolean isGameOver() {
@@ -63,14 +79,16 @@ public class GameViewModel extends AndroidViewModel {
     }
 
     private void checkGameOver() {
-        if (logic.isGameOver() ) {
+        if (logic.isGameOver()) {
             gameOverEvent.postValue("המשחק נגמר");
+            saveUserStatistics();
         }
     }
 
     private boolean checkGameWon() {
         if (logic.isGameWon()) {
             gameWonEvent.postValue("ניצחת!");
+            saveUserStatistics();
             return true;
         } else {
             return false;
@@ -96,4 +114,70 @@ public class GameViewModel extends AndroidViewModel {
         });
         usedLetters.postValue(colors);
     }
+
+    public void saveUserStatistics() {
+        Map<String, Object> userStats = new HashMap<>();
+        userStats.put("timeStamp", Timestamp.now());
+        userStats.put("word", logic.getSecretWord());
+        userStats.put("attempts", logic.getCurrentAttempt());
+        userStats.put("gameWon", logic.isGameWon());
+
+        // Save each game result as a new document in the statistics collection
+        db.collection("users")
+                .document(userId)
+                .collection("statistics")
+                .add(userStats)
+                .addOnSuccessListener(documentReference -> {
+                    // Update streak days
+                    updateStreakDays();
+                });
+    }
+
+    private void resetSteak() {
+        SharedPreferences sharedPreferences = getApplication().getSharedPreferences("user_prefs", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putInt("streak", 1);
+        editor.apply();
+    }
+
+    private void updateStreakDays() {
+        db.collection("users")
+                .document(userId)
+                .collection("statistics")
+                .orderBy("timeStamp", Query.Direction.DESCENDING)
+                .limit(2)
+                .get()
+                .addOnCompleteListener(task -> {
+                    if (task.isSuccessful() && task.getResult() != null) {
+                        List<DocumentSnapshot> documents = task.getResult().getDocuments();
+                        if (documents.size() == 2) {
+                            Timestamp lastGameTime = documents.get(1).getTimestamp("timeStamp");
+                            Timestamp currentGameTime = documents.get(0).getTimestamp("timeStamp");
+
+                            if (lastGameTime != null && currentGameTime != null) {
+
+                                long diffDays = Duration.between(
+                                        lastGameTime.toDate().toInstant(),
+                                        currentGameTime.toDate().toInstant()).toDays();
+
+                                if (diffDays == 1) {
+                                    // Increment streak
+                                    SharedPreferences sharedPreferences = getApplication().getSharedPreferences("user_prefs", MODE_PRIVATE);
+                                    int streak = sharedPreferences.getInt("streak", 0);
+                                    SharedPreferences.Editor editor = sharedPreferences.edit();
+                                    editor.putInt("streak", streak + 1);
+                                    editor.apply();
+                                } else if (diffDays > 1) {
+                                    resetSteak();
+                                }
+                            }
+                        } else {
+                            // First game or only one game played
+                            resetSteak();
+                        }
+                    }
+                });
+    }
+
+
 }

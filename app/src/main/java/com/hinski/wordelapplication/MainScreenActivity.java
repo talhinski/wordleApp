@@ -2,6 +2,7 @@ package com.hinski.wordelapplication;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -45,5 +46,14 @@ public class MainScreenActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-    }
-}
+
+                findViewById(R.id.button_statistics).setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(MainScreenActivity.this, StatisticActivity.class);
+                        startActivity(intent);
+                    }
+                });
+            }
+        }
+

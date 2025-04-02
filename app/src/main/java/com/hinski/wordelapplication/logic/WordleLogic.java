@@ -116,4 +116,12 @@ public class WordleLogic {
         }
         return usedLetters;
     }
+
+    public int getCurrentAttempt() {
+        return game.getCurrentAttempt();
+    }
+
+    public String getSecretWord() {
+        return game.getSecretWord();
+    }
 }

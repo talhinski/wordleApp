@@ -24,7 +24,7 @@ public class MainScreenViewModel extends AndroidViewModel {
     }
 
     private void loadUserName() {
-        String name = sharedPreferences.getString("user_email", null);
+        String name = sharedPreferences.getString("user_name", null);
         if (name == null) {
             navigateToLogin.setValue(true);
         } else {
