@@ -4,6 +4,7 @@ import static android.content.Context.MODE_PRIVATE;
 
 import android.app.Application;
 import android.content.SharedPreferences;
+import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.lifecycle.AndroidViewModel;
@@ -152,6 +153,8 @@ public class GameViewModel extends AndroidViewModel {
                 String resultText = result.getText();
                 // raise Toast with the hint
                 invalidWordEvent.postValue(resultText);
+                Log.d("FirebaseVertexAI", "Response: " + resultText);
+
             }
 
             @Override
