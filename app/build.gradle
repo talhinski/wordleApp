@@ -51,6 +51,21 @@ dependencies {
     // Declare the dependency for the Cloud Firestore library
     // When using the BoM, you don't specify versions in Firebase library dependencies
     implementation("com.google.firebase:firebase-firestore")
+
+    // Add the dependency for the Vertex AI in Firebase library
+    // When using the BoM, you don't specify versions in Firebase library dependencies
+    implementation("com.google.firebase:firebase-vertexai")
+
+    // Required for one-shot operations (to use `ListenableFuture` from Guava Android)
+    implementation("com.google.guava:guava:31.0.1-android")
+
+    // Required for streaming operations (to use `Publisher` from Reactive Streams)
+    implementation("org.reactivestreams:reactive-streams:1.0.4")
+
+    implementation 'com.google.firebase:firebase-appcheck:16.0.0'
+    implementation 'com.google.firebase:firebase-appcheck-playintegrity:16.0.0'
+
+
 }
 
 

@@ -10,11 +10,19 @@ import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
+import com.google.common.util.concurrent.FutureCallback;
+import com.google.common.util.concurrent.Futures;
+import com.google.common.util.concurrent.ListenableFuture;
 import com.google.firebase.Timestamp;
 
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
+import com.google.firebase.vertexai.FirebaseVertexAI;
+import com.google.firebase.vertexai.GenerativeModel;
+import com.google.firebase.vertexai.java.GenerativeModelFutures;
+import com.google.firebase.vertexai.type.Content;
+import com.google.firebase.vertexai.type.GenerateContentResponse;
 import com.hinski.wordelapplication.logic.WordleLogic;
 import com.hinski.wordelapplication.model.Guess;
 import com.hinski.wordelapplication.util.BackgroundColorCalculator;
@@ -22,7 +30,8 @@ import com.hinski.wordelapplication.util.BackgroundColorCalculator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+import java.util.concurrent.Executor;
+import java.util.concurrent.Executors;
 import java.time.Duration;
 import java.time.Instant;
 
@@ -38,6 +47,8 @@ public class GameViewModel extends AndroidViewModel {
 
     private final String userId;
 
+    private final Executor executor;
+
     public GameViewModel(@NonNull Application application) {
         super(application);
         logic = new WordleLogic(application.getResources());
@@ -45,6 +56,8 @@ public class GameViewModel extends AndroidViewModel {
         db = FirebaseFirestore.getInstance();
         SharedPreferences sharedPreferences = application.getSharedPreferences("user_prefs", MODE_PRIVATE);
         userId = sharedPreferences.getString("user_id", null);
+        executor = Executors.newSingleThreadExecutor();
+
     }
 
     public boolean isGameOver() {
@@ -115,6 +128,38 @@ public class GameViewModel extends AndroidViewModel {
         usedLetters.postValue(colors);
     }
 
+    public void getHint() {
+        // Initialize the Vertex AI service and create a `GenerativeModel` instance
+        // Specify a model that supports your use case
+        GenerativeModel gm = FirebaseVertexAI.getInstance()
+                .generativeModel("gemini-2.0-flash");
+        GenerativeModelFutures model = GenerativeModelFutures.from(gm);
+
+
+        String secretWord = logic.getSecretWord();
+        String promptText = String.format("צור רמז במישפט אחד יחסית קצר" +
+                " שיהייה אפשר לנחש במשחק וורדל המילה היא: %s", secretWord);
+        // Provide a prompt that contains text
+        Content prompt = new Content.Builder()
+                .addText(promptText)
+                .build();
+
+        // To generate text output, call generateContent with the text input
+        ListenableFuture<GenerateContentResponse> response = model.generateContent(prompt);
+        Futures.addCallback(response, new FutureCallback<GenerateContentResponse>() {
+            @Override
+            public void onSuccess(GenerateContentResponse result) {
+                String resultText = result.getText();
+                // raise Toast with the hint
+                invalidWordEvent.postValue(resultText);
+            }
+
+            @Override
+            public void onFailure(Throwable t) {
+                t.printStackTrace();
+            }
+        }, executor);
+    }
     public void saveUserStatistics() {
         Map<String, Object> userStats = new HashMap<>();
         userStats.put("timeStamp", Timestamp.now());
