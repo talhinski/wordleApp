@@ -2,7 +2,6 @@ package com.hinski.wordelapplication;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
@@ -12,17 +11,14 @@ import com.hinski.wordelapplication.viewmodel.MainScreenViewModel;
 
 public class MainScreenActivity extends AppCompatActivity {
 
-    private ActivityMainScreenBinding binding;
-    private MainScreenViewModel viewModel;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        binding = ActivityMainScreenBinding.inflate(getLayoutInflater());
+        ActivityMainScreenBinding binding = ActivityMainScreenBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        viewModel = new ViewModelProvider(this).get(MainScreenViewModel.class);
+        MainScreenViewModel viewModel = new ViewModelProvider(this).get(MainScreenViewModel.class);
         binding.setViewModel(viewModel);
         binding.setLifecycleOwner(this);
 
@@ -48,13 +44,13 @@ public class MainScreenActivity extends AppCompatActivity {
             }
         });
 
-                findViewById(R.id.button_statistics).setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        Intent intent = new Intent(MainScreenActivity.this, StatisticActivity.class);
-                        startActivity(intent);
-                    }
-                });
-            }
-        }
+        binding.buttonStatistics.setOnClickListener(v -> {
+            Intent intent = new Intent(MainScreenActivity.this, StatisticActivity.class);
+            startActivity(intent);
+        });
+
+        // Request notification permission for Android 13+
+        WordelApplication.requestNotificationPermission(this);
+    }
+}
 
