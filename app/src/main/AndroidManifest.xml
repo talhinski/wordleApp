@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.hinski.wordelapplication">
 
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
     <application
@@ -15,7 +16,7 @@
         android:roundIcon="@drawable/wordel_icon"
         android:supportsRtl="true"
         android:theme="@style/Theme.WordelApplication"
-        tools:targetApi="31">
+        >
         <activity
             android:name=".StatisticActivity"
             android:exported="false" />
