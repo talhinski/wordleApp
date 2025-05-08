@@ -45,5 +45,15 @@ public class GameBoardFragment extends Fragment {
                         message -> Toast.makeText(getContext(), message, Toast.LENGTH_SHORT)
                                 .show()
                 );
+        gameViewModel.gameWonEvent
+                .observe(getViewLifecycleOwner(),
+                        message -> Toast.makeText(getContext(), message, Toast.LENGTH_SHORT)
+                                .show()
+                );
+        gameViewModel.gameOverEvent
+                .observe(getViewLifecycleOwner(),
+                        message -> Toast.makeText(getContext(), message, Toast.LENGTH_SHORT)
+                                .show()
+                );
     }
 }

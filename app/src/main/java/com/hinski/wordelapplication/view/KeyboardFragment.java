@@ -23,6 +23,10 @@ public class KeyboardFragment extends Fragment {
     private FragmentKeyboardBinding binding;
     private GameViewModel viewModel;
 
+    private boolean isGameFinished() {
+        return viewModel.isGameOver() || viewModel.isGameWon();
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         binding = FragmentKeyboardBinding.inflate(inflater, container, false);
@@ -44,6 +48,8 @@ public class KeyboardFragment extends Fragment {
             button.setOnClickListener(v -> {
                 String buttonTag = button.getTag() != null ? button.getTag().toString() : "";
                 String buttonText = button.getText().toString();
+                if (isGameFinished())
+                    return;
                 if (buttonTag.equals("Enter")) {
                     viewModel.submitCurrentGuess();
                 } else if (buttonTag.equals("Delete")) {

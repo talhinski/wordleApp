@@ -113,6 +113,27 @@ public class WordleGame {
             throw new IllegalStateException("Cannot add more characters to current guess");
         }
         Guess currentGuess = attempts.get(currentAttempt);
+        if (currentChar + 1 == secretWord.length()) {
+            switch (c) {
+                case 'פ':
+                    c = 'ף';
+                    break;
+                case 'צ':
+                    c = 'ץ';
+                    break;
+                case 'כ':
+                    c = 'ך';
+                    break;
+                case 'מ':
+                    c = 'ם';
+                    break;
+                case 'נ':
+                    c = 'ן';
+                    break;
+                default:
+                    break;
+            }
+        }
         currentGuess.getCharResults().get(currentChar).letter.set(c);
         currentChar++;
         return currentGuess;
@@ -141,5 +162,10 @@ public class WordleGame {
         currentGuess.updateGuess(result);
         currentAttempt++;
         currentChar = 0;
+    }
+
+
+    public String getSecretWord() {
+        return secretWord;
     }
 }
