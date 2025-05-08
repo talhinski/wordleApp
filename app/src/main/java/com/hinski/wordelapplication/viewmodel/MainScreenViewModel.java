@@ -14,8 +14,8 @@ public class MainScreenViewModel extends AndroidViewModel {
     public MutableLiveData<String> userName = new MutableLiveData<>();
     public MutableLiveData<Boolean> navigateToLogin = new MutableLiveData<>();
     public MutableLiveData<Boolean> navigateToRegister = new MutableLiveData<>();
-
     public MutableLiveData<Boolean> startGame = new MutableLiveData<>();
+    public MutableLiveData<Boolean> showLogoutConfirmation = new MutableLiveData<>();
 
     public MainScreenViewModel(@NonNull Application application) {
         super(application);
@@ -42,8 +42,14 @@ public class MainScreenViewModel extends AndroidViewModel {
     public void register() {
         navigateToRegister.setValue(true);
     }
+
     public void startNewGame() {
         startGame.setValue(true);
+    }
+
+    // Call this when the logout button is clicked
+    public void onLogoutClicked() {
+        showLogoutConfirmation.setValue(true);
     }
 
 }

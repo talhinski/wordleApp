@@ -1,5 +1,6 @@
 package com.hinski.wordelapplication;
 
+import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 
@@ -11,6 +12,8 @@ import com.hinski.wordelapplication.viewmodel.MainScreenViewModel;
 
 public class MainScreenActivity extends AppCompatActivity {
 
+    private MainScreenViewModel viewModel;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -18,7 +21,7 @@ public class MainScreenActivity extends AppCompatActivity {
         ActivityMainScreenBinding binding = ActivityMainScreenBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        MainScreenViewModel viewModel = new ViewModelProvider(this).get(MainScreenViewModel.class);
+        viewModel = new ViewModelProvider(this).get(MainScreenViewModel.class);
         binding.setViewModel(viewModel);
         binding.setLifecycleOwner(this);
 
@@ -49,8 +52,22 @@ public class MainScreenActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
+        // Observe logout confirmation event
+        viewModel.showLogoutConfirmation.observe(this, this::showLogoutDialog);
+
         // Request notification permission for Android 13+
         WordelApplication.requestNotificationPermission(this);
+    }
+
+    private void showLogoutDialog(Boolean show) {
+        if (Boolean.TRUE.equals(show)) {
+            new AlertDialog.Builder(this, android.R.style.Theme_Material_Dialog_Alert)
+                    .setTitle("Logout")
+                    .setMessage("Are you sure you want to logout?")
+                    .setPositiveButton("Yes", (dialog, which) -> viewModel.logout())
+                    .setNegativeButton("No", (dialog, which) -> dialog.dismiss())
+                    .show();
+        }
     }
 }
 

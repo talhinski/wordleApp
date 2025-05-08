@@ -65,28 +65,34 @@
 
         <Button
             android:id="@+id/button_register"
-            android:layout_width="wrap_content"
+            android:layout_width="210dp"
             android:layout_height="wrap_content"
-            android:text="Register"
-            android:layout_marginTop="16dp"
             android:layout_gravity="center"
-            android:onClick="@{() -> viewModel.register()}" />
+            android:layout_marginTop="16dp"
+            android:backgroundTint="#C9B458"
+            android:onClick="@{() -> viewModel.register()}"
+            android:text="Register"
+            android:textColor="#FFFFFF" />
 
         <Button
             android:id="@+id/button_login"
-            android:layout_width="wrap_content"
+            android:layout_width="225dp"
             android:layout_height="wrap_content"
-            android:text="Login"
+            android:layout_gravity="center"
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#3A3A3C"
             android:layout_marginTop="16dp"
-            android:layout_gravity="center" />
+            android:text="Login" />
 
         <Button
             android:id="@+id/button_logout"
-            android:layout_width="wrap_content"
+            android:layout_width="225dp"
             android:layout_height="wrap_content"
-            android:text="Logout"
-            android:layout_marginTop="16dp"
             android:layout_gravity="center"
-            android:onClick="@{() -> viewModel.logout()}" />
+            android:textColor="#FFFFFF"
+            android:backgroundTint="#3A3A3C"
+            android:layout_marginTop="16dp"
+            android:onClick="@{() -> viewModel.onLogoutClicked()}"
+            android:text="Logout" />
     </LinearLayout>
 </layout>
