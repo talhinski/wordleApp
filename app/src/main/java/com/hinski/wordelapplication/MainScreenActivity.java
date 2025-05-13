@@ -20,7 +20,7 @@ public class MainScreenActivity extends AppCompatActivity {
 
         ActivityMainScreenBinding binding = ActivityMainScreenBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-
+        // Initialize the ViewModel
         viewModel = new ViewModelProvider(this).get(MainScreenViewModel.class);
         binding.setViewModel(viewModel);
         binding.setLifecycleOwner(this);
@@ -30,13 +30,6 @@ public class MainScreenActivity extends AppCompatActivity {
                 Intent intent = new Intent(MainScreenActivity.this, LoginActivity.class);
                 startActivity(intent);
                 finish();
-            }
-        });
-
-        viewModel.navigateToRegister.observe(this, navigate -> {
-            if (navigate) {
-                Intent intent = new Intent(MainScreenActivity.this, RegisterActivity.class);
-                startActivity(intent);
             }
         });
 

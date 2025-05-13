@@ -13,7 +13,6 @@ public class MainScreenViewModel extends AndroidViewModel {
     private final SharedPreferences sharedPreferences;
     public MutableLiveData<String> userName = new MutableLiveData<>();
     public MutableLiveData<Boolean> navigateToLogin = new MutableLiveData<>();
-    public MutableLiveData<Boolean> navigateToRegister = new MutableLiveData<>();
     public MutableLiveData<Boolean> startGame = new MutableLiveData<>();
     public MutableLiveData<Boolean> showLogoutConfirmation = new MutableLiveData<>();
 
@@ -37,10 +36,6 @@ public class MainScreenViewModel extends AndroidViewModel {
         editor.clear();
         editor.apply();
         navigateToLogin.setValue(true);
-    }
-
-    public void register() {
-        navigateToRegister.setValue(true);
     }
 
     public void startNewGame() {
